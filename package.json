@@ -1,0 +1,68 @@
+{
+  "name": "@tom2012/dsh-meeting",
+  "version": "0.2.0",
+  "description": "让同一 DSH 进程内的 root 会话互相可见、可读、可对话的会议室插件，带侧边栏群聊界面",
+  "license": "MIT",
+  "author": {
+    "name": "zbc0315"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbc0315/dsh-meeting.git"
+  },
+  "homepage": "https://github.com/zbc0315/dsh-meeting#readme",
+  "bugs": {
+    "url": "https://github.com/zbc0315/dsh-meeting/issues"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20",
+    "dsh": ">=0.2.1-rc.2"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-workspace",
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "check": "node --check index.js && node --check client.js",
+    "smoke": "node tools/smoke.mjs",
+    "smoke:client": "node tools/client-smoke.mjs",
+    "test": "npm run check && npm run smoke && npm run smoke:client"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "agent",
+    "multi-agent",
+    "session",
+    "group-chat"
+  ]
+}
